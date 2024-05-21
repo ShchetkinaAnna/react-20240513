@@ -1,3 +1,3 @@
-export const Footer = ({ children }) => {
-    return <footer>{children}</footer>;
+export const Footer = () => {
+    return <footer>Footer</footer>;
 };
