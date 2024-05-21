@@ -8,7 +8,7 @@ const root = createRoot(document.getElementById("root"));
 
 root.render(
   <Layout>
-    {restaurants.map((restaurant) => (
+    {restaurants && restaurants.map((restaurant) => (
       <Restaurant restaurant={restaurant} />
     ))}      
   </Layout>
