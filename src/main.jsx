@@ -3,7 +3,6 @@ import { restaurants } from "./constants/mock";
 import { RestaurantTabs } from "./components/restauranttabs/component";
 import { Layout } from "./components/layout/component";
 
-/* eslint-disable react/jsx-key */
 const root = createRoot(document.getElementById("root"));
 
 root.render(

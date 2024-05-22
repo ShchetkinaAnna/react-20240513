@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Restaurant } from "../restaurant/component";
 
+/* eslint-disable react/jsx-key */
 export const RestaurantTabs = ({ restaurants }) => {
   const [idActiveRestaurant, setActiveRestaurant] = useState(
     restaurants?.length > 0 && restaurants[0].id,
