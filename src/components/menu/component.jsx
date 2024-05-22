@@ -1,10 +1,14 @@
 import { Dish } from "../dish/component";
 
 /* eslint-disable react/jsx-key */
-export const Menu = ({ menu }) => {
+export const Menu = ({ menu, callbackMenuOrder }) => {
   if (!menu) {
     return "";
   }
+
+  const callbackDishOrder = (id, value) => {
+    callbackMenuOrder(id, value);
+  };
 
   return (
     <div>
@@ -12,7 +16,7 @@ export const Menu = ({ menu }) => {
       <ul>
       {menu.map((dish) => (
         <li>
-          <Dish dish={dish} />
+          <Dish dish={dish} callbackDishOrder={(value) => callbackDishOrder(dish.id, value)} />
         </li>
       ))}
       </ul>

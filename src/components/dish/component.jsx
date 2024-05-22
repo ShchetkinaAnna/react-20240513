@@ -1,20 +1,18 @@
-import { useState } from "react";
-
 const MAX_DISHES = 5;
 const MIN_DISHES = 0;
 
-export const Dish = ({ dish }) => {
-    const [count, setDishCount] = useState(0);
+export const Dish = ({ dish, callbackDishOrder }) => {
+    const count = dish.count || 0;
 
     const increment = () => {
       if (count < MAX_DISHES) {
-        setDishCount(count + 1);
+        callbackDishOrder(count + 1);
       }
     };
     
     const decrement = () => {
       if (count > MIN_DISHES) {
-        setDishCount(count - 1);
+        callbackDishOrder(count - 1);
       }
     };
 
