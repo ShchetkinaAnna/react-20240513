@@ -1,27 +1,16 @@
+import { useState } from "react";
+import { Counter } from "../counter/component";
+
 const MAX_DISHES = 5;
 const MIN_DISHES = 0;
 
-export const Dish = ({ dish, callbackDishOrder }) => {
-    const count = dish.count || 0;
+export const Dish = ({ dish }) => {
+  const [count, setCount] = useState(MIN_DISHES);
 
-    const increment = () => {
-      if (count < MAX_DISHES) {
-        callbackDishOrder(count + 1);
-      }
-    };
-    
-    const decrement = () => {
-      if (count > MIN_DISHES) {
-        callbackDishOrder(count - 1);
-      }
-    };
-
-    return (<div>
+  return (
+    <div>
       <span>{dish.name}</span>
-      <div>
-        <button onClick={decrement}>-</button>
-        {count}
-        <button onClick={increment}>+</button>
-      </div>
-    </div>);
+      <Counter min={MIN_DISHES} max={MAX_DISHES} value={count} onChange={setCount}/>
+    </div>
+  );
 };

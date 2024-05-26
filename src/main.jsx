@@ -1,12 +1,12 @@
 import { createRoot } from 'react-dom/client'
 import { restaurants } from "./constants/mock";
-import { RestaurantTabs } from "./components/restauranttabs/component";
+import { Restaurants } from "./components/restaurants/component";
 import { Layout } from "./components/layout/component";
 
 const root = createRoot(document.getElementById("root"));
 
 root.render(
   <Layout>
-    <RestaurantTabs restaurants={restaurants} />
+    <Restaurants restaurants={restaurants} />
   </Layout>
 );
