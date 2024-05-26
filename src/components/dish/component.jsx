@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 const MAX_DISHES = 5;
 const MIN_DISHES = 0;
