@@ -1,27 +1,33 @@
+import { useCallback, useState } from "react";
+
 const MAX_DISHES = 5;
 const MIN_DISHES = 0;
 
-export const Dish = ({ dish, callbackDishOrder }) => {
-    const count = dish.count || 0;
+const useCount = () => {
+  const [count, setCount] = useState(MIN_DISHES); 
 
-    const increment = () => {
-      if (count < MAX_DISHES) {
-        callbackDishOrder(count + 1);
-      }
-    };
-    
-    const decrement = () => {
-      if (count > MIN_DISHES) {
-        callbackDishOrder(count - 1);
-      }
-    };
+  const increment = useCallback(() => {
+    setCount((currentCount) => currentCount + 1);
+  }, []);
+  
+  const decrement = useCallback(() => {
+    setCount((currentCount) => currentCount - 1);
+  }, []);
 
-    return (<div>
+  return { count, increment, decrement };
+}
+
+export const Dish = ({ dish }) => {
+  const { count, increment, decrement } = useCount(); 
+
+  return (
+    <div>
       <span>{dish.name}</span>
       <div>
-        <button onClick={decrement}>-</button>
+        <button onClick={decrement} disabled={count === MIN_DISHES}>-</button>
         {count}
-        <button onClick={increment}>+</button>
+        <button onClick={increment} disabled={count === MAX_DISHES}>+</button>
       </div>
-    </div>);
+    </div>
+  );
 };
