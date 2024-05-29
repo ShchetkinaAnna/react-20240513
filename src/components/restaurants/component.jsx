@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { Restaurant } from "../restaurant/component";
-import { RestaurantTabs } from "../restaurant-tabs/component";
+import { useState } from 'react';
+
+import { Restaurant } from '../restaurant/component';
+import { RestaurantTabs } from '../restaurant-tabs/component';
 
 export const Restaurants = ({ restaurants }) => {
   const [idActiveRestaurant, setActiveRestaurant] = useState(
@@ -15,8 +16,21 @@ export const Restaurants = ({ restaurants }) => {
 
   return (
     <div>
-      <RestaurantTabs restaurants={restaurants} activeTabIndex={activeRestaurantIndex} onTabClick={setActiveRestaurant} />
+      <RestaurantTabs
+        restaurants={restaurants}
+        activeTabIndex={activeRestaurantIndex}
+        onTabClick={setActiveRestaurant}
+      />
+      <Restaurant restaurant={restaurants[activeRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[activeRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[activeRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[activeRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[activeRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[activeRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[activeRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[activeRestaurantIndex]} />
+      <Restaurant restaurant={restaurants[activeRestaurantIndex]} />
       <Restaurant restaurant={restaurants[activeRestaurantIndex]} />
     </div>
-  )
+  );
 };

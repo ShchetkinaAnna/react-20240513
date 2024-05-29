@@ -1,5 +1,6 @@
-import { useReducer } from "react";
-import { Rating } from "../rating/component";
+import { useReducer } from 'react';
+
+import { Rating } from '../rating/component';
 
 const SET_REVIEW_AUTHOR = 'SET_REVIEW_AUTHOR';
 const SET_REVIEW_TEXT = 'SET_REVIEW_TEXT';
