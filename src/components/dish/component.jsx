@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { ThemeContext } from '../../contexts/theme';
+import { UserContext } from '../../contexts/user';
 import { useCount } from '../../hooks/use-count';
 import { StyledButton } from '../styled-button/component';
 
@@ -9,19 +9,27 @@ const MIN_DISHES = 0;
 
 export const Dish = ({ dish }) => {
   const { count, increment, decrement } = useCount(MIN_DISHES);
-  const theme = useContext(ThemeContext);
+  const user = useContext(UserContext);
 
   return (
     <div>
       <span>{dish.name}</span>
       <div>
-        <StyledButton activeTheme={theme} onClick={decrement} disabled={count === MIN_DISHES}>
-          -
-        </StyledButton>
+        {user === '' ? (
+          <></>
+        ) : (
+          <StyledButton onClick={decrement} disabled={count === MIN_DISHES}>
+            -
+          </StyledButton>
+        )}
         {count}
-        <StyledButton activeTheme={theme} onClick={increment} disabled={count === MAX_DISHES}>
-          +
-        </StyledButton>
+        {user === '' ? (
+          <></>
+        ) : (
+          <StyledButton onClick={increment} disabled={count === MAX_DISHES}>
+            +
+          </StyledButton>
+        )}
       </div>
     </div>
   );

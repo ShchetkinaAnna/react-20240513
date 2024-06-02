@@ -1,7 +1,9 @@
+import { StyledButton } from '../styled-button/component';
+
 export const ButtonToggler = ({ onClick, title }) => {
   return (
-    <button style={{ height: '30px' }} onClick={onClick}>
+    <StyledButton style={{ height: '30px' }} onClick={onClick}>
       {title}
-    </button>
+    </StyledButton>
   );
 };
