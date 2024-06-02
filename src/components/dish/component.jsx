@@ -15,17 +15,13 @@ export const Dish = ({ dish }) => {
     <div>
       <span>{dish.name}</span>
       <div>
-        {user === '' ? (
-          <></>
-        ) : (
+        {user === '' ? null : (
           <StyledButton onClick={decrement} disabled={count === MIN_DISHES}>
             -
           </StyledButton>
         )}
         {count}
-        {user === '' ? (
-          <></>
-        ) : (
+        {user === '' ? null : (
           <StyledButton onClick={increment} disabled={count === MAX_DISHES}>
             +
           </StyledButton>

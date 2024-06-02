@@ -13,6 +13,7 @@ export const Layout = ({ children }) => {
 
   return (
     <div>
+      <div id="modal" style={{ position: 'relative', zIndex: 2 }}></div>
       <UserContext.Provider value={user}>
         <ThemeContext.Provider value={activeTheme}>
           <ScrollProgressBar />
@@ -20,8 +21,7 @@ export const Layout = ({ children }) => {
             setTheme={() => {
               setTheme(activeTheme === THEMES.light ? THEMES.dark : THEMES.light);
             }}
-            signInUser={() => setUser('Иванов И.И.')}
-            signOutUser={() => setUser('')}
+            setUser={setUser}
           />
           <main>{children}</main>
           <Footer />
