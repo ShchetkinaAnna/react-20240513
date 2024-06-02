@@ -1,6 +1,8 @@
-import { useReducer } from 'react';
+import { useContext, useReducer } from 'react';
 
+import { ThemeContext } from '../../contexts/theme';
 import { Rating } from '../rating/component';
+import { StyledButton } from '../styled-button/component';
 
 const SET_REVIEW_AUTHOR = 'SET_REVIEW_AUTHOR';
 const SET_REVIEW_TEXT = 'SET_REVIEW_TEXT';
@@ -30,6 +32,7 @@ function reducer(state, action) {
 
 export const NewReviewForm = () => {
   const [form, dispatch] = useReducer(reducer, DEFAULT_FORM_VALUE);
+  const theme = useContext(ThemeContext);
 
   return (
     <div>
@@ -56,7 +59,9 @@ export const NewReviewForm = () => {
           onChange={(ratingValue) => dispatch({ type: SET_REVIEW_RATING, payload: ratingValue })}
         />
       </div>
-      <button onClick={() => dispatch({ type: RESET_FORM })}>Сохранить</button>
+      <StyledButton activeTheme={theme} onClick={() => dispatch({ type: RESET_FORM })}>
+        Сохранить
+      </StyledButton>
     </div>
   );
 };
