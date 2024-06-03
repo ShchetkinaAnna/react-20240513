@@ -1,3 +1,9 @@
+import { StyledButton } from '../styled-button/component';
+
 export const Tab = ({ title, onClick, isActive }) => {
-  return <button onClick={onClick} disabled={isActive}>{title}</button>
+  return (
+    <StyledButton onClick={onClick} disabled={isActive}>
+      {title}
+    </StyledButton>
+  );
 };

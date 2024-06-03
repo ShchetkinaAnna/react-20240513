@@ -1,6 +1,7 @@
 import { useReducer } from 'react';
 
 import { Rating } from '../rating/component';
+import { StyledButton } from '../styled-button/component';
 
 const SET_REVIEW_AUTHOR = 'SET_REVIEW_AUTHOR';
 const SET_REVIEW_TEXT = 'SET_REVIEW_TEXT';
@@ -56,7 +57,7 @@ export const NewReviewForm = () => {
           onChange={(ratingValue) => dispatch({ type: SET_REVIEW_RATING, payload: ratingValue })}
         />
       </div>
-      <button onClick={() => dispatch({ type: RESET_FORM })}>Сохранить</button>
+      <StyledButton onClick={() => dispatch({ type: RESET_FORM })}>Сохранить</StyledButton>
     </div>
   );
 };
