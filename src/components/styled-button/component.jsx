@@ -1,10 +1,8 @@
-import { useContext } from 'react';
-
-import { THEMES } from '../../constants/themes';
-import { ThemeContext } from '../../contexts/theme';
+import { THEMES } from '../../contexts/theme/constants';
+import { useTheme } from '../../contexts/theme/hooks';
 
 export const StyledButton = ({ children, ...props }) => {
-  const activeTheme = useContext(ThemeContext);
+  const { activeTheme } = useTheme();
 
   const propsWithStyled = {
     ...props,

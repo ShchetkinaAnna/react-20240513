@@ -1,6 +1,4 @@
-import { useContext } from 'react';
-
-import { UserContext } from '../../contexts/user';
+import { useUser } from '../../contexts/user/hooks';
 import { useCount } from '../../hooks/use-count';
 import { StyledButton } from '../styled-button/component';
 
@@ -9,7 +7,7 @@ const MIN_DISHES = 0;
 
 export const Dish = ({ dish }) => {
   const { count, increment, decrement } = useCount(MIN_DISHES);
-  const user = useContext(UserContext);
+  const { user } = useUser();
 
   return (
     <div>

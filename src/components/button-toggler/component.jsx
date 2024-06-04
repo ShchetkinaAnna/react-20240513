@@ -1,15 +1,13 @@
-import { useContext } from 'react';
-
-import { THEMES } from '../../constants/themes';
-import { ThemeContext } from '../../contexts/theme';
+import { THEMES } from '../../contexts/theme/constants';
+import { useTheme } from '../../contexts/theme/hooks';
 import { StyledButton } from '../styled-button/component';
 
-export const ButtonToggler = ({ onClick }) => {
-  const activeTheme = useContext(ThemeContext);
+export const ButtonToggler = () => {
+  const { activeTheme, toggleTheme } = useTheme();
 
   return (
-    <StyledButton style={{ height: '30px' }} onClick={onClick}>
-      {activeTheme === THEMES.light ? 'Светлая тема' : 'Тёмная тема'}
+    <StyledButton style={{ height: '30px' }} onClick={toggleTheme}>
+      {activeTheme === THEMES.light ? 'Тёмная тема' : 'Светлая тема'}
     </StyledButton>
   );
 };

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { StyledButton } from '../styled-button/component';
 
-export const SignIn = ({ signIn, cancel }) => {
+export const AuthorizationForm = ({ onCancel, onLogin }) => {
   const [userName, setUserName] = useState('');
 
   return (
@@ -15,16 +15,10 @@ export const SignIn = ({ signIn, cancel }) => {
           setUserName(event.target.value);
         }}
       />
-      <StyledButton
-        disabled={userName === ''}
-        onClick={() => {
-          signIn(userName);
-          cancel();
-        }}
-      >
+      <StyledButton disabled={userName === ''} onClick={() => onLogin(userName)}>
         Войти
       </StyledButton>
-      <StyledButton onClick={cancel}>Отмена</StyledButton>
+      <StyledButton onClick={onCancel}>Отмена</StyledButton>
     </div>
   );
 };
