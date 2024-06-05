@@ -5,6 +5,8 @@ import { Layout } from './components/layout/component';
 import { Restaurants } from './components/restaurants/component';
 import { store } from './redux';
 
+import './styles/normalize.css';
+
 const root = createRoot(document.getElementById('root'));
 
 root.render(

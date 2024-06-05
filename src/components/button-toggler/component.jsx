@@ -6,7 +6,7 @@ export const ButtonToggler = () => {
   const { activeTheme, toggleTheme } = useTheme();
 
   return (
-    <StyledButton style={{ height: '30px' }} onClick={toggleTheme}>
+    <StyledButton onClick={toggleTheme}>
       {activeTheme === THEMES.light ? 'Тёмная тема' : 'Светлая тема'}
     </StyledButton>
   );

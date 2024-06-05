@@ -29,15 +29,11 @@ export const AuthorizationButton = () => {
         </Modal>
       ) : null}
       {!isAuthorized ? (
-        <StyledButton style={{ height: '30px' }} onClick={handleOpen}>
-          Войти
-        </StyledButton>
+        <StyledButton onClick={handleOpen}>Войти</StyledButton>
       ) : (
         <>
           <span>{user}</span>
-          <StyledButton style={{ height: '30px' }} onClick={logout}>
-            Выйти
-          </StyledButton>
+          <StyledButton onClick={logout}>Выйти</StyledButton>
         </>
       )}
     </div>
