@@ -1,20 +1,20 @@
-import { Dish } from "../dish/component";
+import { Dish } from '../dish/component';
 
 /* eslint-disable react/jsx-key */
-export const Menu = ({ menu }) => {
-  if (!menu) {
-    return "";
+export const Menu = ({ menuIds }) => {
+  if (!menuIds) {
+    return '';
   }
 
   return (
     <div>
       <h3>Меню</h3>
       <ul>
-      {menu.map((dish) => (
-        <li>
-          <Dish dish={dish} />
-        </li>
-      ))}
+        {menuIds.map((dishId) => (
+          <li>
+            <Dish dishId={dishId} />
+          </li>
+        ))}
       </ul>
     </div>
   );
