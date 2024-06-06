@@ -1,5 +1,7 @@
 import { Dish } from '../dish/component';
 
+import styles from './styles.module.css';
+
 /* eslint-disable react/jsx-key */
 export const Menu = ({ menuIds }) => {
   if (!menuIds) {
@@ -7,15 +9,11 @@ export const Menu = ({ menuIds }) => {
   }
 
   return (
-    <div>
+    <div className={styles.menu}>
       <h3>Меню</h3>
-      <ul>
-        {menuIds.map((dishId) => (
-          <li>
-            <Dish dishId={dishId} />
-          </li>
-        ))}
-      </ul>
+      {menuIds.map((dishId) => (
+        <Dish dishId={dishId} className={styles.menu__item} />
+      ))}
     </div>
   );
 };
