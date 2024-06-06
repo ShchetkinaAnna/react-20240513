@@ -10,7 +10,7 @@ export const StyledButton = ({ children, ...props }) => {
 
   const propsWithStyled = {
     ...props,
-    className: classNames(props.className, styles.button, {
+    className: classNames(styles.button, {
       [styles.button_light]: activeTheme === THEMES.light,
       [styles.button_dark]: activeTheme !== THEMES.light,
     }),
