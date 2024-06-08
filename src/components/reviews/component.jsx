@@ -1,4 +1,4 @@
-import { Review } from '../review/component';
+import { ReviewContainer } from '../review/container';
 
 /* eslint-disable react/jsx-key */
 export const Reviews = ({ reviewIds }) => {
@@ -12,7 +12,7 @@ export const Reviews = ({ reviewIds }) => {
       <ul>
         {reviewIds.map((reviewId) => (
           <li>
-            <Review reviewId={reviewId} />
+            <ReviewContainer id={reviewId} />
           </li>
         ))}
       </ul>

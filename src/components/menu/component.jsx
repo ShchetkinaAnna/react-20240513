@@ -1,18 +1,18 @@
-import { Dish } from '../dish/component';
+import { DishContainer } from '../dish/container';
 
 import styles from './styles.module.css';
 
 /* eslint-disable react/jsx-key */
-export const Menu = ({ menuIds }) => {
-  if (!menuIds) {
+export const Menu = ({ dishIds }) => {
+  if (!dishIds) {
     return '';
   }
 
   return (
     <div className={styles.menu}>
       <h3>Меню</h3>
-      {menuIds.map((dishId) => (
-        <Dish dishId={dishId} className={styles.menu__item} />
+      {dishIds.map((dishId) => (
+        <DishContainer id={dishId} className={styles.menu__item} />
       ))}
     </div>
   );

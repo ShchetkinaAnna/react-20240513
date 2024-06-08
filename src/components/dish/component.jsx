@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { useSelector } from 'react-redux';
 
 import { useUser } from '../../contexts/user/hooks';
 import { useCount } from '../../hooks/use-count';
@@ -10,15 +9,9 @@ import styles from './styles.module.css';
 const MAX_DISHES = 5;
 const MIN_DISHES = 0;
 
-export const Dish = ({ dishId, className }) => {
-  const dish = useSelector((state) => state.dishe.entities[dishId]);
-
+export const Dish = ({ dish, className }) => {
   const { count, increment, decrement } = useCount(MIN_DISHES);
   const { user } = useUser();
-
-  if (!dish) {
-    return '';
-  }
 
   return (
     <div className={classNames(styles.dish, className)}>

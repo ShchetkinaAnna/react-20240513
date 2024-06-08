@@ -1,15 +1,21 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
-import { Restaurant } from '../restaurant/component';
-import { RestaurantTabs } from '../restaurant-tabs/component';
+import { selectFirstRestaurantId } from '../../redux/entities/restaurant/selectors';
+import { RestaurantContainer } from '../restaurant/container';
+import { RestaurantTabsContainer } from '../restaurant-tabs/container';
 
 export const Restaurants = () => {
-  const [idActiveRestaurant, setActiveRestaurant] = useState(null);
+  const restaurantId = useSelector(selectFirstRestaurantId);
+  const [idActiveRestaurant, setActiveRestaurant] = useState(restaurantId);
 
   return (
     <div>
-      <RestaurantTabs onTabClick={setActiveRestaurant} />
-      <Restaurant restaurantId={idActiveRestaurant} />
+      <RestaurantTabsContainer
+        onTabClick={setActiveRestaurant}
+        idActiveRestaurant={idActiveRestaurant}
+      />
+      <RestaurantContainer id={idActiveRestaurant} />
     </div>
   );
 };
