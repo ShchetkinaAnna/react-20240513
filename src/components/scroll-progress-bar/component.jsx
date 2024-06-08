@@ -2,6 +2,8 @@ import { useRef, useEffect } from 'react';
 
 import { useScrollProgress } from '../../hooks/use-scroll-progress';
 
+import styles from './styles.module.css';
+
 export const ScrollProgressBar = () => {
   const containerProgressBarRef = useRef();
   const { progressBarWidth } = useScrollProgress();
@@ -10,16 +12,5 @@ export const ScrollProgressBar = () => {
     containerProgressBarRef.current.style.width = progressBarWidth + '%';
   }, [progressBarWidth]);
 
-  return (
-    <div
-      ref={containerProgressBarRef}
-      style={{
-        backgroundColor: 'red',
-        height: 10,
-        position: 'fixed',
-        top: 0,
-        left: 0,
-      }}
-    ></div>
-  );
+  return <div ref={containerProgressBarRef} className={styles.progressbar}></div>;
 };

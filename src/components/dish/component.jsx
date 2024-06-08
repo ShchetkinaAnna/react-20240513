@@ -1,18 +1,27 @@
-import { useContext } from 'react';
+import classNames from 'classnames';
+import { useSelector } from 'react-redux';
 
-import { UserContext } from '../../contexts/user';
+import { useUser } from '../../contexts/user/hooks';
 import { useCount } from '../../hooks/use-count';
 import { StyledButton } from '../styled-button/component';
+
+import styles from './styles.module.css';
 
 const MAX_DISHES = 5;
 const MIN_DISHES = 0;
 
-export const Dish = ({ dish }) => {
+export const Dish = ({ dishId, className }) => {
+  const dish = useSelector((state) => state.dishe.entities[dishId]);
+
   const { count, increment, decrement } = useCount(MIN_DISHES);
-  const user = useContext(UserContext);
+  const { user } = useUser();
+
+  if (!dish) {
+    return '';
+  }
 
   return (
-    <div>
+    <div className={classNames(styles.dish, className)}>
       <span>{dish.name}</span>
       <div>
         {user === '' ? null : (

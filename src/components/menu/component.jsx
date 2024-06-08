@@ -1,21 +1,19 @@
-import { Dish } from "../dish/component";
+import { Dish } from '../dish/component';
+
+import styles from './styles.module.css';
 
 /* eslint-disable react/jsx-key */
-export const Menu = ({ menu }) => {
-  if (!menu) {
-    return "";
+export const Menu = ({ menuIds }) => {
+  if (!menuIds) {
+    return '';
   }
 
   return (
-    <div>
+    <div className={styles.menu}>
       <h3>Меню</h3>
-      <ul>
-      {menu.map((dish) => (
-        <li>
-          <Dish dish={dish} />
-        </li>
+      {menuIds.map((dishId) => (
+        <Dish dishId={dishId} className={styles.menu__item} />
       ))}
-      </ul>
     </div>
   );
 };

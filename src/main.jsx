@@ -1,12 +1,18 @@
-import { createRoot } from 'react-dom/client'
-import { restaurants } from "./constants/mock";
-import { Restaurants } from "./components/restaurants/component";
-import { Layout } from "./components/layout/component";
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
 
-const root = createRoot(document.getElementById("root"));
+import { Layout } from './components/layout/component';
+import { Restaurants } from './components/restaurants/component';
+import { store } from './redux';
+
+import './styles/normalize.css';
+
+const root = createRoot(document.getElementById('root'));
 
 root.render(
-  <Layout>
-    <Restaurants restaurants={restaurants} />
-  </Layout>
+  <Provider store={store}>
+    <Layout>
+      <Restaurants />
+    </Layout>
+  </Provider>,
 );

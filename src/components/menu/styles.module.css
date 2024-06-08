@@ -1,0 +1,9 @@
+.menu {
+    display: block;
+}
+
+.menu__item {
+    &:not(:last-child) {
+        margin-bottom: 20px;
+    }
+}
