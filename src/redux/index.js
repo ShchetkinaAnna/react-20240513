@@ -8,4 +8,5 @@ import { CartSlice } from './ui/cart';
 
 export const store = configureStore({
   reducer: combineSlices(UserSlice, ReviewSlice, RestaurantSlice, DishSlice, CartSlice),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
