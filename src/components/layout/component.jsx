@@ -2,7 +2,7 @@ import { ThemeContextProvider } from '../../contexts/theme/provider';
 import { UserContextProvider } from '../../contexts/user/provider';
 import { Footer } from '../footer/component';
 import { Header } from '../header/component';
-import { ScrollProgressBar } from '../scroll-progress-bar/component';
+import { ScrollProgressBarContainer } from '../scroll-progress-bar/container';
 
 export const Layout = ({ children }) => {
   return (
@@ -11,7 +11,7 @@ export const Layout = ({ children }) => {
       <div style={{ zIndex: 1 }}>
         <UserContextProvider>
           <ThemeContextProvider>
-            <ScrollProgressBar />
+            <ScrollProgressBarContainer />
             <Header />
             <main>{children}</main>
             <Footer />
