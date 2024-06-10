@@ -1,4 +1,4 @@
-import { AuthorizationForm } from '../authorization-form/component';
+import { AuthorizationFormContainer } from '../authorization-form/container';
 import { Modal } from '../modal/component';
 import { StyledButton } from '../styled-button/component';
 
@@ -14,7 +14,7 @@ export const AuthorizationButton = ({
     <div>
       {isVisibleModal ? (
         <Modal onClose={closeModal}>
-          <AuthorizationForm onCancel={closeModal} onLogin={login} />
+          <AuthorizationFormContainer onCancel={closeModal} onLogin={login} />
         </Modal>
       ) : null}
       {user === '' ? (
