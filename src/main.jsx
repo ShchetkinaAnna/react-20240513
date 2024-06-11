@@ -5,14 +5,14 @@ import { Layout } from './components/layout/component';
 import { store } from './redux';
 
 import './styles/normalize.css';
-import { RestaurantsContainer } from './components/restaurants/container';
+import { Restaurants } from './components/restaurants/component';
 
 const root = createRoot(document.getElementById('root'));
 
 root.render(
   <Provider store={store}>
     <Layout>
-      <RestaurantsContainer />
+      <Restaurants />
     </Layout>
   </Provider>,
 );

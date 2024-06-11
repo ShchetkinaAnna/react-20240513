@@ -1,11 +1,31 @@
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { selectFirstRestaurant } from '../../redux/entities/restaurant/selectors';
+import { getRestaurants } from '../../redux/entities/restaurant/thunks/get-restaurants';
 import { RestaurantContainer } from '../restaurant/container';
 import { RestaurantTabsContainer } from '../restaurant-tabs/container';
 
-export const Restaurants = ({ id, onTabClick }) => {
+export const Restaurants = () => {
+  const restaurantId = useSelector(selectFirstRestaurant);
+  const [idActiveRestaurant, setActiveRestaurant] = useState(restaurantId);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getRestaurants());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setActiveRestaurant(restaurantId);
+  }, [restaurantId]);
+
   return (
     <div>
-      <RestaurantTabsContainer onTabClick={onTabClick} idActiveRestaurant={id} />
-      <RestaurantContainer id={id} />
+      <RestaurantTabsContainer
+        onTabClick={setActiveRestaurant}
+        idActiveRestaurant={idActiveRestaurant}
+      />
+      <RestaurantContainer id={idActiveRestaurant} />
     </div>
   );
 };
