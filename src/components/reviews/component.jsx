@@ -1,8 +1,8 @@
-import { Review } from '../review/component';
+import { ReviewContainer } from '../review/container';
 
 /* eslint-disable react/jsx-key */
-export const Reviews = ({ reviewIds }) => {
-  if (!reviewIds) {
+export const Reviews = ({ ids }) => {
+  if (!ids) {
     return '';
   }
 
@@ -10,9 +10,9 @@ export const Reviews = ({ reviewIds }) => {
     <div>
       <h3>Отзывы</h3>
       <ul>
-        {reviewIds.map((reviewId) => (
+        {ids.map((id) => (
           <li>
-            <Review reviewId={reviewId} />
+            <ReviewContainer id={id} />
           </li>
         ))}
       </ul>

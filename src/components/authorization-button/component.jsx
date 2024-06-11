@@ -1,35 +1,24 @@
-import { useCallback, useState } from 'react';
-
-import { useUser } from '../../contexts/user/hooks';
-import { AuthorizationForm } from '../authorization-form/component';
+import { AuthorizationFormContainer } from '../authorization-form/container';
 import { Modal } from '../modal/component';
 import { StyledButton } from '../styled-button/component';
 
-export const AuthorizationButton = () => {
-  const { user, logout, login } = useUser();
-  const isAuthorized = user !== '';
-
-  const [isVisibleAuthorizedModal, setIsVisibleAuthorizedModal] = useState(false);
-
-  const handleClose = useCallback(() => setIsVisibleAuthorizedModal(false), []);
-  const handleOpen = useCallback(() => setIsVisibleAuthorizedModal(true), []);
-  const handleLogin = useCallback(
-    (name) => {
-      login(name);
-      handleClose();
-    },
-    [login, handleClose],
-  );
-
+export const AuthorizationButton = ({
+  isVisibleModal,
+  user,
+  login,
+  openModal,
+  closeModal,
+  logout,
+}) => {
   return (
     <div>
-      {isVisibleAuthorizedModal ? (
-        <Modal onClose={handleClose}>
-          <AuthorizationForm onCancel={handleClose} onLogin={handleLogin} />
+      {isVisibleModal ? (
+        <Modal onClose={closeModal}>
+          <AuthorizationFormContainer onCancel={closeModal} onLogin={login} />
         </Modal>
       ) : null}
-      {!isAuthorized ? (
-        <StyledButton onClick={handleOpen}>Войти</StyledButton>
+      {user === '' ? (
+        <StyledButton onClick={openModal}>Войти</StyledButton>
       ) : (
         <>
           <span>{user}</span>
