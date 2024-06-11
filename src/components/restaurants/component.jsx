@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { selectFirstRestaurant } from '../../redux/entities/restaurant/selectors';
 import { getRestaurants } from '../../redux/entities/restaurant/thunks/get-restaurants';
+import { getUsers } from '../../redux/entities/user/thunks/get-users';
 import { RestaurantContainer } from '../restaurant/container';
 import { RestaurantTabsContainer } from '../restaurant-tabs/container';
 
@@ -13,6 +14,10 @@ export const Restaurants = () => {
 
   useEffect(() => {
     dispatch(getRestaurants());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getUsers());
   }, [dispatch]);
 
   useEffect(() => {

@@ -1,6 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export const getUsers = createAsyncThunk('user/getUsers', async () => {
-  const response = await fetch('http://localhost:3001/api/users');
-  return response.json();
-});
+import { BASE_ENDPOINT } from '../../../../constants/endpoints';
+import { selectUserIds } from '../selectors';
+
+export const getUsers = createAsyncThunk(
+  'user/getUsers',
+  async () => {
+    const response = await fetch(`${BASE_ENDPOINT}/api/users`);
+    return response.json();
+  },
+  {
+    condition: ({ forceRefetch = false } = {}, { getState }) =>
+      forceRefetch || !selectUserIds(getState())?.length,
+  },
+);
