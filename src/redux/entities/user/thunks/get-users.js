@@ -6,7 +6,7 @@ import { selectUserIds } from '../selectors';
 export const getUsers = createAsyncThunk(
   'user/getUsers',
   async () => {
-    const response = await fetch(`${BASE_ENDPOINT}/api/users`);
+    const response = await fetch(`${BASE_ENDPOINT}/users`);
     return response.json();
   },
   {
