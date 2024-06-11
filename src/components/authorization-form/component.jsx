@@ -1,6 +1,12 @@
+import { useCallback, useState } from 'react';
+
 import { StyledButton } from '../styled-button/component';
 
-export const AuthorizationForm = ({ userName, cancel, login, onChange }) => {
+export const AuthorizationForm = ({ onLogin, onCancel }) => {
+  const [userName, setUserName] = useState('');
+
+  const handleLogin = useCallback(() => onLogin(userName), [userName, onLogin]);
+
   return (
     <div>
       <input
@@ -8,13 +14,13 @@ export const AuthorizationForm = ({ userName, cancel, login, onChange }) => {
         size="40"
         value={userName}
         onChange={(event) => {
-          onChange(event.target.value);
+          setUserName(event.target.value);
         }}
       />
-      <StyledButton disabled={userName === ''} onClick={login}>
+      <StyledButton disabled={userName === ''} onClick={handleLogin}>
         Войти
       </StyledButton>
-      <StyledButton onClick={cancel}>Отмена</StyledButton>
+      <StyledButton onClick={onCancel}>Отмена</StyledButton>
     </div>
   );
 };

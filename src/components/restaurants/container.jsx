@@ -7,7 +7,7 @@ import { getRestaurants } from '../../redux/entities/restaurant/thunks/get-resta
 import { Restaurants } from './component';
 
 export const RestaurantsContainer = () => {
-  const restaurantId = useSelector((state) => selectFirstRestaurant(state));
+  const restaurantId = useSelector(selectFirstRestaurant);
   const [idActiveRestaurant, setActiveRestaurant] = useState(restaurantId);
   const dispatch = useDispatch();
 
