@@ -1,13 +1,23 @@
-import { MenuContainer } from '../menu/container';
+import { useGetRestaurantsQuery } from '../../redux/service/api';
+import { selectRestaurantFromResult } from '../../redux/service/api/selectors';
+import { Menu } from '../menu/component';
 import { NewReviewForm } from '../new-review-form/component';
-import { ReviewsContainer } from '../reviews/container';
+import { Reviews } from '../reviews/component';
 
-export const Restaurant = ({ restaurant }) => {
+export const Restaurant = ({ restaurantId }) => {
+  const { data: restaurant } = useGetRestaurantsQuery(undefined, {
+    selectFromResult: selectRestaurantFromResult(restaurantId),
+  });
+
+  if (!restaurant) {
+    return '';
+  }
+
   return (
     <div>
       <h2>Название ресторана: {restaurant.name}</h2>
-      <MenuContainer restaurantId={restaurant.id} />
-      <ReviewsContainer restaurantId={restaurant.id} />
+      <Menu restaurantId={restaurant.id} />
+      <Reviews restaurantId={restaurant.id} />
       <NewReviewForm />
     </div>
   );

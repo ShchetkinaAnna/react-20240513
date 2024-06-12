@@ -1,39 +1,30 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 
-import { useRequest } from '../../hooks/use-request';
-import { selectFirstRestaurant } from '../../redux/entities/restaurant/selectors';
-import { getRestaurants } from '../../redux/entities/restaurant/thunks/get-restaurants';
-import { getUsers } from '../../redux/entities/user/thunks/get-users';
-import { REQUEST_STATUS } from '../../redux/ui/request/constants';
-import { RestaurantContainer } from '../restaurant/container';
-import { RestaurantTabsContainer } from '../restaurant-tabs/container';
+import { useGetRestaurantsQuery, useGetUsersQuery } from '../../redux/service/api';
+import { Restaurant } from '../restaurant/component';
+import { RestaurantTabs } from '../restaurant-tabs/component';
 
 export const Restaurants = () => {
-  const restaurantId = useSelector(selectFirstRestaurant);
-  const [idActiveRestaurant, setActiveRestaurant] = useState(restaurantId);
-
-  const requestRestaurantsStatus = useRequest(getRestaurants);
-  const requestUsersStatus = useRequest(getUsers);
+  const { data: restaurants, isLoading: isLoadingRestaurants } = useGetRestaurantsQuery();
+  const { isLoading: isLoadingUsers } = useGetUsersQuery();
+  const [idActiveRestaurant, setActiveRestaurant] = useState(null);
 
   useEffect(() => {
-    setActiveRestaurant(restaurantId);
-  }, [restaurantId]);
+    setActiveRestaurant(restaurants?.length > 0 && restaurants[0].id);
+  }, [restaurants]);
 
-  if (
-    requestRestaurantsStatus === REQUEST_STATUS.pending ||
-    requestUsersStatus === REQUEST_STATUS.pending
-  ) {
+  if (isLoadingRestaurants || isLoadingUsers) {
     return <div>Loading...</div>;
   }
 
   return (
     <div>
-      <RestaurantTabsContainer
+      <RestaurantTabs
+        restaurants={restaurants}
         onTabClick={setActiveRestaurant}
         idActiveRestaurant={idActiveRestaurant}
       />
-      <RestaurantContainer id={idActiveRestaurant} />
+      <Restaurant restaurantId={idActiveRestaurant} />
     </div>
   );
 };

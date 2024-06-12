@@ -4,6 +4,7 @@ import { DishSlice } from './entities/dish';
 import { RestaurantSlice } from './entities/restaurant';
 import { ReviewSlice } from './entities/review';
 import { UserSlice } from './entities/user';
+import { apiService } from './service/api';
 import { CartSlice } from './ui/cart';
 import { RequestSlice } from './ui/request';
 
@@ -15,7 +16,8 @@ export const store = configureStore({
     DishSlice,
     CartSlice,
     RequestSlice,
+    apiService,
   ),
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiService.middleware),
   devTools: import.meta.env.DEV,
 });
