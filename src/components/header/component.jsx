@@ -1,10 +1,14 @@
 import { AuthorizationButton } from '../authorization-button/component';
 import { ButtonToggler } from '../button-toggler/component';
+import { CartIndicatorContainer } from '../cart-indicator/container';
+
+import styles from './styles.module.css';
 
 export const Header = () => {
   return (
-    <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <h1 style={{ flexGrow: 1 }}>Header</h1>
+    <header className={styles.header}>
+      <h1 className={styles.header__title}>Header</h1>
+      <CartIndicatorContainer />
       <AuthorizationButton />
       <ButtonToggler />
     </header>
