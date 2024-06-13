@@ -1,11 +1,30 @@
-import { RestaurantContainer } from '../restaurant/container';
-import { RestaurantTabsContainer } from '../restaurant-tabs/container';
+import { useEffect, useState } from 'react';
 
-export const Restaurants = ({ id, onTabClick }) => {
+import { useGetRestaurantsQuery, useGetUsersQuery } from '../../redux/service/api';
+import { Restaurant } from '../restaurant/component';
+import { RestaurantTabs } from '../restaurant-tabs/component';
+
+export const Restaurants = () => {
+  const { data: restaurants, isLoading: isLoadingRestaurants } = useGetRestaurantsQuery();
+  const { isLoading: isLoadingUsers } = useGetUsersQuery();
+  const [idActiveRestaurant, setActiveRestaurant] = useState(null);
+
+  useEffect(() => {
+    setActiveRestaurant(restaurants?.length > 0 && restaurants[0].id);
+  }, [restaurants]);
+
+  if (isLoadingRestaurants || isLoadingUsers) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
-      <RestaurantTabsContainer onTabClick={onTabClick} idActiveRestaurant={id} />
-      <RestaurantContainer id={id} />
+      <RestaurantTabs
+        restaurants={restaurants}
+        onTabClick={setActiveRestaurant}
+        idActiveRestaurant={idActiveRestaurant}
+      />
+      <Restaurant restaurantId={idActiveRestaurant} />
     </div>
   );
 };
