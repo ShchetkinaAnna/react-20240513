@@ -1,23 +1,20 @@
 import { useReducer } from 'react';
 
+import { useCreateReviewMutation } from '../../redux/service/api';
 import { Rating } from '../rating/component';
 import { StyledButton } from '../styled-button/component';
 
-const SET_REVIEW_AUTHOR = 'SET_REVIEW_AUTHOR';
 const SET_REVIEW_TEXT = 'SET_REVIEW_TEXT';
 const SET_REVIEW_RATING = 'SET_REVIEW_RATING';
 const RESET_FORM = 'RESET_FORM';
 
 const DEFAULT_FORM_VALUE = {
-  author: '',
   text: '',
   rating: 1,
 };
 
 function reducer(state, action) {
   switch (action.type) {
-    case SET_REVIEW_AUTHOR:
-      return { ...state, author: action.payload };
     case SET_REVIEW_TEXT:
       return { ...state, text: action.payload };
     case SET_REVIEW_RATING:
@@ -29,19 +26,17 @@ function reducer(state, action) {
   }
 }
 
-export const NewReviewForm = () => {
+export const NewReviewForm = ({ restaurantId }) => {
   const [form, dispatch] = useReducer(reducer, DEFAULT_FORM_VALUE);
+
+  const [createReview, { isLoading }] = useCreateReviewMutation();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
-      <div>
-        <span>Имя:</span>
-        <input
-          type="text"
-          value={form.author}
-          onChange={(event) => dispatch({ type: SET_REVIEW_AUTHOR, payload: event.target.value })}
-        />
-      </div>
       <div>
         <span>Текст:</span>
         <input
@@ -57,7 +52,20 @@ export const NewReviewForm = () => {
           onChange={(ratingValue) => dispatch({ type: SET_REVIEW_RATING, payload: ratingValue })}
         />
       </div>
-      <StyledButton onClick={() => dispatch({ type: RESET_FORM })}>Сохранить</StyledButton>
+      <StyledButton
+        onClick={() => {
+          createReview({
+            restaurantId,
+            newReview: {
+              ...form,
+              user: 'a304959a-76c0-4b34-954a-b38dbf310360',
+            },
+          });
+          dispatch({ type: RESET_FORM });
+        }}
+      >
+        Сохранить
+      </StyledButton>
     </div>
   );
 };
