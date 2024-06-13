@@ -1,21 +1,28 @@
-import { ReviewContainer } from '../review/container';
+import { useGetReviewsByRestaurantIdQuery } from '../../redux/service/api';
+import { Review } from '../review/component';
 
 /* eslint-disable react/jsx-key */
-export const Reviews = ({ ids }) => {
-  if (!ids) {
+export const Reviews = ({ restaurantId }) => {
+  const { data: reviews, isFetching } = useGetReviewsByRestaurantIdQuery(restaurantId);
+
+  if (isFetching) {
+    return <div>Loading...</div>;
+  }
+
+  if (!reviews) {
     return '';
   }
 
   return (
     <div>
       <h3>Отзывы</h3>
-      <ul>
-        {ids.map((id) => (
-          <li>
-            <ReviewContainer id={id} />
-          </li>
+      <div>
+        {reviews.map((review) => (
+          <div>
+            <Review review={review} />
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
