@@ -16,13 +16,13 @@ export const Reviews = ({ restaurantId }) => {
   return (
     <div>
       <h3>Отзывы</h3>
-      <ul>
+      <div>
         {reviews.map((review) => (
-          <li>
+          <div>
             <Review review={review} />
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
