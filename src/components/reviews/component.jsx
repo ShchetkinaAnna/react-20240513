@@ -1,6 +1,8 @@
 import { useGetReviewsByRestaurantIdQuery } from '../../redux/service/api';
 import { Review } from '../review/component';
 
+import styles from './styles.module.css';
+
 /* eslint-disable react/jsx-key */
 export const Reviews = ({ restaurantId }) => {
   const { data: reviews, isFetching } = useGetReviewsByRestaurantIdQuery(restaurantId);
@@ -14,15 +16,11 @@ export const Reviews = ({ restaurantId }) => {
   }
 
   return (
-    <div>
+    <div className={styles.reviews}>
       <h3>Отзывы</h3>
-      <div>
-        {reviews.map((review) => (
-          <div>
-            <Review review={review} />
-          </div>
-        ))}
-      </div>
+      {reviews.map((review) => (
+        <Review review={review} className={styles.reviews__item} />
+      ))}
     </div>
   );
 };
