@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useState } from 'react';
 
 import { useGetUsersQuery } from '../../redux/service/api';
-import { selectUserFromResult } from '../../redux/service/api/selectors';
+import { selectEntityFromResult } from '../../redux/service/api/selectors';
 import { ReviewForm } from '../review-form/component';
 import { MODE_FORM } from '../review-form/constants';
 import { StyledButton } from '../styled-button/component';
@@ -13,7 +13,7 @@ export const Review = ({ review, className }) => {
   const [isEdit, setIsEdit] = useState(false);
 
   const { data: user } = useGetUsersQuery(undefined, {
-    selectFromResult: selectUserFromResult(review.userId),
+    selectFromResult: selectEntityFromResult(review.userId),
   });
 
   if (!review) {
