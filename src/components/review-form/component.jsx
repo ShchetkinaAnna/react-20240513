@@ -1,10 +1,7 @@
 import { useReducer } from 'react';
 
-import { useCreateReviewMutation, useUpdateReviewMutation } from '../../redux/service/api';
 import { Rating } from '../rating/component';
 import { StyledButton } from '../styled-button/component';
-
-import { MODE_FORM } from './constants';
 
 const SET_REVIEW_TEXT = 'SET_REVIEW_TEXT';
 const SET_REVIEW_RATING = 'SET_REVIEW_RATING';
@@ -28,23 +25,8 @@ function reducer(state, action) {
   }
 }
 
-export const ReviewForm = ({ restaurantId, review, modeForm, cancelEdit }) => {
-  const [form, dispatch] = useReducer(
-    reducer,
-    modeForm === MODE_FORM.create
-      ? DEFAULT_FORM_VALUE
-      : {
-          text: review.text,
-          rating: review.rating,
-        },
-  );
-
-  const [createReview, { isLoading: isLoadingCreateReview }] = useCreateReviewMutation();
-  const [updateReview, { isLoading: isLoadingEditReview }] = useUpdateReviewMutation();
-
-  if (isLoadingCreateReview || isLoadingEditReview) {
-    return <div>Loading...</div>;
-  }
+export const ReviewForm = ({ initialValue = DEFAULT_FORM_VALUE, onSaveClick, onCancelClick }) => {
+  const [form, dispatch] = useReducer(reducer, initialValue);
 
   return (
     <div>
@@ -63,39 +45,14 @@ export const ReviewForm = ({ restaurantId, review, modeForm, cancelEdit }) => {
           onChange={(ratingValue) => dispatch({ type: SET_REVIEW_RATING, payload: ratingValue })}
         />
       </div>
-      {modeForm === MODE_FORM.create && (
-        <StyledButton
-          onClick={() => {
-            createReview({
-              restaurantId,
-              newReview: {
-                ...form,
-                userId: 'a304959a-76c0-4b34-954a-b38dbf310360',
-              },
-            });
-            dispatch({ type: RESET_FORM });
-          }}
-        >
-          Сохранить
-        </StyledButton>
-      )}
-      {modeForm === MODE_FORM.edit && (
-        <>
-          <StyledButton
-            onClick={() => {
-              updateReview({
-                review: {
-                  ...review,
-                  ...form,
-                },
-              });
-            }}
-          >
-            Сохранить
-          </StyledButton>
-          <StyledButton onClick={cancelEdit}>Отмена</StyledButton>
-        </>
-      )}
+      <StyledButton
+        onClick={() => {
+          onSaveClick(form);
+        }}
+      >
+        Сохранить
+      </StyledButton>
+      <>{onCancelClick && <StyledButton onClick={onCancelClick}>Отмена</StyledButton>}</>
     </div>
   );
 };

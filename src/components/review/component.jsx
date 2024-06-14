@@ -1,11 +1,10 @@
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { useGetUsersQuery } from '../../redux/service/api';
 import { selectEntityFromResult } from '../../redux/service/api/selectors';
-import { ReviewForm } from '../review-form/component';
-import { MODE_FORM } from '../review-form/constants';
 import { StyledButton } from '../styled-button/component';
+import { UpdateReviewFormContainer } from '../update-review-form/container';
 
 import styles from './styles.module.css';
 
@@ -16,13 +15,21 @@ export const Review = ({ review, className }) => {
     selectFromResult: selectEntityFromResult(review.userId),
   });
 
+  const switchEditMode = useCallback(() => setIsEdit((isEditOn) => !isEditOn), []);
+
   if (!review) {
     return '';
   }
 
   return (
     <div className={classNames(styles.review, className)}>
-      {!isEdit && (
+      {isEdit ? (
+        <UpdateReviewFormContainer
+          review={review}
+          onCancel={switchEditMode}
+          onSave={switchEditMode}
+        ></UpdateReviewFormContainer>
+      ) : (
         <>
           <div>
             <span>Пользователь: </span>
@@ -36,15 +43,8 @@ export const Review = ({ review, className }) => {
             <span>Рейтинг: </span>
             <span>{review.rating}</span>
           </div>
-          <StyledButton onClick={() => setIsEdit(!isEdit)}>Редактировать</StyledButton>
+          <StyledButton onClick={switchEditMode}>Редактировать</StyledButton>
         </>
-      )}
-      {isEdit && (
-        <ReviewForm
-          review={review}
-          modeForm={MODE_FORM.edit}
-          cancelEdit={() => setIsEdit(false)}
-        ></ReviewForm>
       )}
     </div>
   );

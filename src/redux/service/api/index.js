@@ -4,7 +4,7 @@ import { BASE_ENDPOINT } from '../../../constants/endpoints';
 
 export const apiService = createApi({
   reducerPath: 'api',
-  tagTypes: ['Review', 'Restaurant'],
+  tagTypes: ['Review', 'RestaurantReviews'],
   baseQuery: fetchBaseQuery({ baseUrl: BASE_ENDPOINT }),
   endpoints: (builder) => ({
     getRestaurants: builder.query({
@@ -44,12 +44,12 @@ export const apiService = createApi({
       ],
     }),
     updateReview: builder.mutation({
-      query: ({ review }) => ({
+      query: (review) => ({
         url: `review/${review.id}`,
         method: 'PATCH',
         body: review,
       }),
-      invalidatesTags: (result, _, { review }) => [{ type: 'Review', id: review.id }],
+      invalidatesTags: (result, _, review) => [{ type: 'Review', id: review.id }],
     }),
   }),
 });

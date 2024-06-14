@@ -1,8 +1,7 @@
 import { useGetRestaurantsQuery } from '../../redux/service/api';
 import { selectEntityFromResult } from '../../redux/service/api/selectors';
 import { Menu } from '../menu/component';
-import { ReviewForm } from '../review-form/component';
-import { MODE_FORM } from '../review-form/constants';
+import { NewReviewFormContainer } from '../new-review-form/container';
 import { Reviews } from '../reviews/component';
 
 export const Restaurant = ({ restaurantId }) => {
@@ -17,10 +16,10 @@ export const Restaurant = ({ restaurantId }) => {
   return (
     <div>
       <h2>Название ресторана: {restaurant.name}</h2>
-      <Menu restaurantId={restaurant.id} />
-      <Reviews restaurantId={restaurant.id} />
+      <Menu restaurantId={restaurantId} />
+      <Reviews restaurantId={restaurantId} />
       <h3>Добавить отзыв:</h3>
-      <ReviewForm restaurantId={restaurant.id} modeForm={MODE_FORM.create} />
+      <NewReviewFormContainer restaurantId={restaurantId} />
     </div>
   );
 };
