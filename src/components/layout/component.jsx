@@ -1,10 +1,12 @@
+import { Outlet } from 'react-router-dom';
+
 import { ThemeContextProvider } from '../../contexts/theme/provider';
 import { UserContextProvider } from '../../contexts/user/provider';
 import { Footer } from '../footer/component';
 import { Header } from '../header/component';
 import { ScrollProgressBarContainer } from '../scroll-progress-bar/container';
 
-export const Layout = ({ children }) => {
+export const Layout = () => {
   return (
     <div>
       <div id="modal" style={{ position: 'relative', zIndex: 2 }}></div>
@@ -13,7 +15,9 @@ export const Layout = ({ children }) => {
           <ThemeContextProvider>
             <ScrollProgressBarContainer />
             <Header />
-            <main>{children}</main>
+            <main>
+              <Outlet />
+            </main>
             <Footer />
           </ThemeContextProvider>
         </UserContextProvider>

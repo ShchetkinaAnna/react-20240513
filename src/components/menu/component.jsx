@@ -1,10 +1,14 @@
+import { useParams } from 'react-router-dom';
+
 import { useGetMenuByRestaurantIdQuery } from '../../redux/service/api';
 import { DishContainer } from '../dish/container';
 
 import styles from './styles.module.css';
 
 /* eslint-disable react/jsx-key */
-export const Menu = ({ restaurantId }) => {
+export const Menu = () => {
+  const { restaurantId } = useParams();
+
   const { data: menu, isFetching } = useGetMenuByRestaurantIdQuery(restaurantId);
 
   if (isFetching) {

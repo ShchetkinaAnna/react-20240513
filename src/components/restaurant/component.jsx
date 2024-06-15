@@ -1,10 +1,11 @@
+import { Outlet, useParams } from 'react-router-dom';
+
 import { useGetRestaurantsQuery } from '../../redux/service/api';
 import { selectEntityFromResult } from '../../redux/service/api/selectors';
-import { Menu } from '../menu/component';
-import { NewReviewFormContainer } from '../new-review-form/container';
-import { Reviews } from '../reviews/component';
+import { RestaurantTabs } from '../restaurant-tabs/component';
 
-export const Restaurant = ({ restaurantId }) => {
+export const Restaurant = () => {
+  const { restaurantId } = useParams();
   const { data: restaurant } = useGetRestaurantsQuery(undefined, {
     selectFromResult: selectEntityFromResult(restaurantId),
   });
@@ -16,10 +17,8 @@ export const Restaurant = ({ restaurantId }) => {
   return (
     <div>
       <h2>Название ресторана: {restaurant.name}</h2>
-      <Menu restaurantId={restaurantId} />
-      <Reviews restaurantId={restaurantId} />
-      <h3>Добавить отзыв:</h3>
-      <NewReviewFormContainer restaurantId={restaurantId} />
+      <RestaurantTabs />
+      <Outlet />
     </div>
   );
 };
