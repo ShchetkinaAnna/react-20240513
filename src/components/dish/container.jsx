@@ -1,8 +1,4 @@
-import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { decrement, increment } from '../../redux/ui/cart';
-import { selectDishCount } from '../../redux/ui/cart/selectors';
+import { useCart } from '../../hooks/use-cart';
 
 import { Dish } from './component';
 
@@ -10,11 +6,7 @@ const MAX_DISHES = 5;
 const MIN_DISHES = 0;
 
 export const DishContainer = ({ dish, ...props }) => {
-  const count = useSelector((state) => selectDishCount(state, dish.id));
-
-  const dispatch = useDispatch();
-  const handleIncrement = useCallback(() => dispatch(increment(dish.id)), [dispatch, dish.id]);
-  const handleDecrement = useCallback(() => dispatch(decrement(dish.id)), [dispatch, dish.id]);
+  const { count, increment, decrement } = useCart(dish.id);
 
   if (!dish) {
     return '';
@@ -25,8 +17,8 @@ export const DishContainer = ({ dish, ...props }) => {
       {...props}
       dish={dish}
       count={count}
-      increment={handleIncrement}
-      decrement={handleDecrement}
+      increment={increment}
+      decrement={decrement}
       min={MIN_DISHES}
       max={MAX_DISHES}
     />

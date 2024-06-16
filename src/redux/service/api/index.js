@@ -33,6 +33,11 @@ export const apiService = createApi({
           .map(({ id }) => ({ type: 'Review', id }))
           .concat({ type: 'Review', id: 'All' }, { type: 'RestaurantReviews', id: restaurantId }),
     }),
+    getDishById: builder.query({
+      query: (dishId) => ({
+        url: `dish/${dishId}`,
+      }),
+    }),
     createReview: builder.mutation({
       query: ({ restaurantId, newReview }) => ({
         url: `review/${restaurantId}`,
@@ -58,6 +63,7 @@ export const {
   useGetRestaurantsQuery,
   useGetMenuByRestaurantIdQuery,
   useGetReviewsByRestaurantIdQuery,
+  useGetDishByIdQuery,
   useGetUsersQuery,
   useCreateReviewMutation,
   useUpdateReviewMutation,
