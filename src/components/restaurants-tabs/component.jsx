@@ -14,7 +14,7 @@ export const RestaurantsTabs = ({ restaurants }) => {
 
   return (
     <div>
-      <Search searchValue={searchValue} setSearchValue={setSearchParams} />
+      <Search initialValue={searchValue} setValue={setSearchParams} delay={1000} />
       {restaurants
         .filter(({ name }) => name.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1)
         .map(({ id, name }) => (
