@@ -1,9 +1,17 @@
-import { StyledButton } from '../styled-button/component';
+import classNames from 'classnames';
+import { NavLink } from 'react-router-dom';
 
-export const Tab = ({ title, onClick, isActive }) => {
+import styles from './styles.module.css';
+
+export const Tab = ({ title, to }) => {
   return (
-    <StyledButton onClick={onClick} disabled={isActive}>
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        classNames(styles.tab_link, { [styles.tab_link__active]: isActive })
+      }
+    >
       {title}
-    </StyledButton>
+    </NavLink>
   );
 };

@@ -1,22 +1,10 @@
 import { Tab } from '../tab/component';
 
-/* eslint-disable react/jsx-key */
-export const RestaurantTabs = ({ restaurants, onTabClick, idActiveRestaurant }) => {
-  if (!restaurants) {
-    return;
-  }
-
+export const RestaurantTabs = () => {
   return (
     <div>
-      {restaurants.map(({ id, name }) => (
-        <Tab
-          onClick={() => {
-            onTabClick(id);
-          }}
-          isActive={id === idActiveRestaurant}
-          title={name}
-        ></Tab>
-      ))}
+      <Tab to={'menu'} title={'Меню'}></Tab>
+      <Tab to={'reviews'} title={'Отзывы'}></Tab>
     </div>
   );
 };

@@ -1,0 +1,7 @@
+.tab_link {
+    padding-left: 15px;
+}
+
+.tab_link__active {
+    text-decoration: none;
+}

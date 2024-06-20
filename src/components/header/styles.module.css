@@ -1,0 +1,13 @@
+.header {
+    margin-bottom: 20px;
+}
+
+.header__main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__title {
+    flex-grow: 1;
+}

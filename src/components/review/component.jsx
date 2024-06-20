@@ -1,30 +1,50 @@
-import { useState } from 'react';
+import classNames from 'classnames';
+import { useCallback, useState } from 'react';
 
-import { ReviewForm } from '../review-form/component';
-import { MODE_FORM } from '../review-form/constants';
+import { useGetUsersQuery } from '../../redux/service/api';
+import { selectEntityFromResult } from '../../redux/service/api/selectors';
 import { StyledButton } from '../styled-button/component';
+import { UpdateReviewFormContainer } from '../update-review-form/container';
 
-export const Review = ({ review }) => {
+import styles from './styles.module.css';
+
+export const Review = ({ review, className }) => {
   const [isEdit, setIsEdit] = useState(false);
+
+  const { data: user } = useGetUsersQuery(undefined, {
+    selectFromResult: selectEntityFromResult(review.userId),
+  });
+
+  const switchEditMode = useCallback(() => setIsEdit((isEditOn) => !isEditOn), []);
 
   if (!review) {
     return '';
   }
 
   return (
-    <div>
-      {!isEdit && (
-        <>
-          <span>{review.text}</span>
-          <StyledButton onClick={() => setIsEdit(!isEdit)}>Редактировать</StyledButton>
-        </>
-      )}
-      {isEdit && (
-        <ReviewForm
+    <div className={classNames(styles.review, className)}>
+      {isEdit ? (
+        <UpdateReviewFormContainer
           review={review}
-          modeForm={MODE_FORM.edit}
-          cancelEdit={() => setIsEdit(false)}
-        ></ReviewForm>
+          onCancel={switchEditMode}
+          onSave={switchEditMode}
+        ></UpdateReviewFormContainer>
+      ) : (
+        <>
+          <div>
+            <span>Пользователь: </span>
+            <span>{user.name}</span>
+          </div>
+          <div>
+            <span>Текст: </span>
+            <span>{review.text}</span>
+          </div>
+          <div>
+            <span>Рейтинг: </span>
+            <span>{review.rating}</span>
+          </div>
+          <StyledButton onClick={switchEditMode}>Редактировать</StyledButton>
+        </>
       )}
     </div>
   );
